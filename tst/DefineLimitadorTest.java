@@ -18,4 +18,9 @@ public class DefineLimitadorTest {
 		assertEquals(parser.getDelimitador(), ";"); //falsificação
 	}
 
+	@Test(expected = DelimitadorInvalidoException.class)
+	public void testeLimitador2() throws DelimitadorInvalidoException {
+		parser.defineLimitador(""); // Duplicação
+	}
+
 }
