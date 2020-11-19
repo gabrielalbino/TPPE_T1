@@ -25,5 +25,12 @@ public class LeituraArquivoTest {
 		parser.abrirArquivoAnalise(path);
 	}
 
+	@Test	//Triangulação
+	public void testeAbrirArquivo3() throws ArquivoNaoEncontradoException {
+		String path = "res/totalTime.out";
+		parser.abrirArquivoAnalise(path);
+		assertEquals(parser.getArquivoAnalise(path).getPath(), path);
+	}
+
 	
 }

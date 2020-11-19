@@ -11,12 +11,12 @@ public class Parser {
 			this.file = temp;
 		}
 		else {
-			throw new ArquivoNaoEncontradoException();
+			throw new ArquivoNaoEncontradoException();// Duplicação
 		}
 	}
 
 	public File getArquivoAnalise(String path2) {
-		return new File("res/analysisTime.out"); //Falsificação
+		return file; //Triangulação
 	}
 	
 }
