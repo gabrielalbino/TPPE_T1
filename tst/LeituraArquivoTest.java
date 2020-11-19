@@ -13,10 +13,17 @@ public class LeituraArquivoTest {
 	}
 
 	@Test
-	public void testeAbrirArquivo1() {
+	public void testeAbrirArquivo1() throws ArquivoNaoEncontradoException {
 		String path = "res/analysisTime.out";
 		parser.abrirArquivoAnalise(path);
 		assertEquals(parser.getArquivoAnalise(path).getPath(), path);
 	}
 
+	@Test(expected = ArquivoNaoEncontradoException.class) //Duplicação
+	public void testeAbrirArquivo2() throws ArquivoNaoEncontradoException {
+		String path = "arquivoInexistente.out";
+		parser.abrirArquivoAnalise(path);
+	}
+
+	
 }
