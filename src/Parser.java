@@ -11,7 +11,7 @@ public class Parser {
 			this.file = temp;
 		}
 		else {
-			throw new ArquivoNaoEncontradoException();// Duplicação
+			throw new ArquivoNaoEncontradoException(path);// Duplicação
 		}
 	}
 
