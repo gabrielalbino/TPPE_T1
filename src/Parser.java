@@ -30,6 +30,6 @@ public class Parser {
 	}
 	
 	public String getDelimitador() {
-		return ";"; //falsificação
+		return this.delimitador; //triangulação
 	}
 }

@@ -14,13 +14,21 @@ public class DefineLimitadorTest {
 
 	@Test
 	public void testeLimitador1() throws DelimitadorInvalidoException {
-		parser.defineLimitador(";");
-		assertEquals(parser.getDelimitador(), ";"); //falsificação
+		String delimitador = ";";
+		parser.defineLimitador(delimitador);
+		assertEquals(parser.getDelimitador(), delimitador); //falsificação
 	}
 
 	@Test(expected = DelimitadorInvalidoException.class)
 	public void testeLimitador2() throws DelimitadorInvalidoException {
-		parser.defineLimitador(""); // Duplicação
+		String delimitador = "Teste";
+		parser.defineLimitador(delimitador); // Duplicação
 	}
 
+	@Test
+	public void testeLimitador3() throws DelimitadorInvalidoException {
+		String delimitador = ",";
+		parser.defineLimitador(delimitador);
+		assertEquals(parser.getDelimitador(), delimitador); //triangulação
+	}
 }
