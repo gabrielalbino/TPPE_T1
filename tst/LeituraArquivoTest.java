@@ -16,7 +16,7 @@ public class LeituraArquivoTest {
 	public void testeAbrirArquivo1() throws ArquivoNaoEncontradoException {
 		String path = "res/analysisTime.out";
 		parser.abrirArquivoAnalise(path);
-		assertEquals(parser.getArquivoAnalise(path).getPath(), path);
+		assertEquals(parser.getArquivoAnalise().getPath(), path);
 	}
 
 	@Test(expected = ArquivoNaoEncontradoException.class) //Duplicação
@@ -29,8 +29,7 @@ public class LeituraArquivoTest {
 	public void testeAbrirArquivo3() throws ArquivoNaoEncontradoException {
 		String path = "res/totalTime.out";
 		parser.abrirArquivoAnalise(path);
-		assertEquals(parser.getArquivoAnalise(path).getPath(), path);
+		assertEquals(parser.getArquivoAnalise().getPath(), path);
 	}
 
-	
 }
