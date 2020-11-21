@@ -45,4 +45,29 @@ public class SaidaTeste {
 		assertEquals(expectedLine, line);
 	}
 
+	@Test
+	public void AnalysisTeste2() throws ArquivoNaoEncontradoException, DelimitadorInvalidoException, EscritaNaoPermitidaException, IOException { //falsificação
+		BufferedReader reader;
+		String line="", expectedLine = "", arquivoAnalise = "res/analysisTime.out", delimitador = ";";
+		Boolean modoColuna = false;
+		
+		expectedLine = "1;439;705;738;729;752;740;658;713;765;710";
+		
+		parser.abrirArquivoAnalise(arquivoAnalise);
+		parser.defineLimitador(delimitador);
+		parser.setModoSaida(modoColuna);
+		parser.lerDadosAnalise();
+		parser.salvarDadosAnalise();
+		
+		try {
+			reader = new BufferedReader(new FileReader(new File("analysisTimeTab.out")));
+			line = reader.readLine();
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		assertEquals(expectedLine, line);
+	}
+
 }
