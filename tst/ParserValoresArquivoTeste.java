@@ -24,4 +24,13 @@ public class ParserValoresArquivoTeste {
 		assertEquals(20, analises.size());
 	}
 
+	@Test
+	public void testeParser2() throws ArquivoNaoEncontradoException { //duplicação
+		ArrayList<ArrayList<Integer>> analises;
+		parser.abrirArquivoAnalise("res/totalTime.out");
+		parser.lerDadosAnalise();
+		analises = parser.getDadosAnalise();
+		assertEquals(776, (int)analises.get(0).get(0));
+	}
+
 }

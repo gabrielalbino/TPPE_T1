@@ -1,5 +1,7 @@
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +12,8 @@ public class Parser {
 	private FileWriter outputFileWriter;
 	private String delimitador;
 	private Boolean modoColuna;
-
+	ArrayList<ArrayList<Integer>> analise;
+	
 	public void abrirArquivoAnalise(String path) throws ArquivoNaoEncontradoException {
 		File temp = new File(path); 
 		if(temp.exists()) {
@@ -61,16 +64,35 @@ public class Parser {
 	}
 
 	public void lerDadosAnalise() {
-		// falsificação
-		
+		analise = new ArrayList<ArrayList<Integer>>(); //duplicação
+		int analiseIndex = -1;
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String line;
+			do {
+				line = reader.readLine();
+				if(line != null) {
+					System.out.println(line);
+					System.out.flush();
+					try {						
+						int tempo = Integer.parseInt(line);
+						analise.get(analiseIndex).add(tempo);
+					} catch (NumberFormatException e) {
+						analiseIndex++;
+						analise.add(new ArrayList<Integer>());
+						
+					}
+				}
+			} while (line != null);
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 
 	public ArrayList<ArrayList<Integer>> getDadosAnalise() {
-		ArrayList<ArrayList<Integer>> analise = new ArrayList<ArrayList<Integer>>(); //falsificação
-		for(int i = 0; i < 20; i++) {
-			analise.add(new ArrayList<Integer>());
-		}
-		return analise; // Falsificação
+		return analise; // duplicação
 	}
 	
 }
