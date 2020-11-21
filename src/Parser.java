@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.io.IOException;
 
 public class Parser {
 
@@ -16,7 +17,7 @@ public class Parser {
 		}
 	}
 
-	public File getArquivoAnalise(String path2) {
+	public File getArquivoAnalise() {
 		return file; //Triangulação
 	}
 
@@ -32,4 +33,13 @@ public class Parser {
 	public String getDelimitador() {
 		return this.delimitador; //triangulação
 	}
+	
+	public void abrirArquivoSaida(String path) throws IOException {
+		//Falsificação
+	}
+	
+	public File getArquivoSaida() {
+		return new File("output.out"); //Falsificação
+	}
+	
 }
