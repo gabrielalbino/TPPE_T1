@@ -8,6 +8,7 @@ public class Parser {
 	private File file, outputFile;
 	private FileWriter outputFileWriter;
 	private String delimitador;
+	private Boolean modoColuna;
 
 	public void abrirArquivoAnalise(String path) throws ArquivoNaoEncontradoException {
 		File temp = new File(path); 
@@ -48,6 +49,14 @@ public class Parser {
 	
 	public File getArquivoSaida() {
 		return outputFile; //Triangulação
+	}
+	
+	public void setModoSaida(Boolean modoColuna) {
+		this.modoColuna = modoColuna; //duplicação
+	}
+	
+	public Boolean getModoSaida() {
+		return modoColuna; //duplicação
 	}
 	
 }
