@@ -60,3 +60,4 @@ local.properties
 #.project
 output.out
 output2.out
+*.out

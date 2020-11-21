@@ -44,7 +44,7 @@ public class Parser {
 	public void abrirArquivoSaida(String path) throws EscritaNaoPermitidaException {
 		try {			
 			this.outputFile = new File(path);
-			this.outputFileWriter = new FileWriter(this.outputFile);
+			this.outputFileWriter = new FileWriter(this.outputFile, false);
 		}
 		catch (IOException e) {
 			throw new EscritaNaoPermitidaException("Erro ao abrir o arquivo de saída"); //Triangulação
@@ -73,8 +73,6 @@ public class Parser {
 			do {
 				line = reader.readLine();
 				if(line != null) {
-					System.out.println(line);
-					System.out.flush();
 					try {						
 						int tempo = Integer.parseInt(line);
 						analise.get(analiseIndex).add(tempo);
@@ -94,5 +92,48 @@ public class Parser {
 	public ArrayList<ArrayList<Integer>> getDadosAnalise() {
 		return analise; // duplicação
 	}
-	
+
+	public void salvarDadosAnalise() throws EscritaNaoPermitidaException, IOException {// falsificação
+		String arquivoSaida = "totalTimeTab.out";
+		String linha = "";
+		if(file.getPath().contains("analysis")) {
+			arquivoSaida = "analysisTimeTab.out";
+		}
+		abrirArquivoSaida(arquivoSaida);
+		if(modoColuna) {
+			Boolean foundAny;
+			int index = 0;
+			for(int i = 0; i < analise.size(); i++) {
+				linha += (i+1) + (i != analise.size() - 1 ? delimitador : "");
+			}
+			linha += "\n";				
+			outputFileWriter.write(linha);
+			do {
+				linha = "";
+				foundAny = false;
+				for(int i = 0; i < analise.size(); i++) {
+					if(index < analise.get(i).size()) {
+						linha += analise.get(i).get(index) + (i != analise.size() - 1 ? delimitador : "\n");
+						foundAny = true;
+					}
+					else {
+						linha += (i != analise.size() - 1 ? delimitador : "\n");
+					}
+				}
+				if(foundAny)
+					outputFileWriter.write(linha);
+				index++;
+			} while(foundAny);
+		}
+		if(!modoColuna) {
+			for(int i = 0; i < analise.size(); i++) {
+				linha = i + 1 + delimitador;
+				for(int j = 0; j < analise.get(i).size(); j++) {
+					linha += analise.get(i).get(j) + (j != analise.get(i).size() - 1 ? delimitador : "\n");
+				}
+				outputFileWriter.write(linha);
+			}
+		}
+		outputFileWriter.close();
+	}
 }
