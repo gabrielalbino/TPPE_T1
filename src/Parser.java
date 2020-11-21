@@ -52,11 +52,11 @@ public class Parser {
 	}
 	
 	public void setModoSaida(Boolean modoColuna) {
-		//Falsificação
+		this.modoColuna = modoColuna; //duplicação
 	}
 	
 	public Boolean getModoSaida() {
-		return true; //falsificação
+		return modoColuna; //duplicação
 	}
 	
 }

@@ -19,4 +19,11 @@ public class ModoArquivoTeste {
 		assertEquals(parser.getModoSaida(), modoColuna);
 	}
 
+	@Test
+	public void testeModoArquivo2()  { //duplicação
+		Boolean modoColuna = false;
+		parser.setModoSaida(modoColuna);
+		assertEquals(parser.getModoSaida(), modoColuna);
+	}
+
 }
