@@ -70,4 +70,29 @@ public class SaidaTeste {
 		assertEquals(expectedLine, line);
 	}
 
+	@Test
+	public void AnalysisTeste3() throws ArquivoNaoEncontradoException, DelimitadorInvalidoException, EscritaNaoPermitidaException, IOException { //falsificação
+		BufferedReader reader;
+		String line="", expectedLine = "", arquivoAnalise = "res/totalTime.out", delimitador = ",";
+		Boolean modoColuna = false;
+		
+		expectedLine = "1,776,1102,1121,1134,1161,1204,1070,1140,1157,1091";
+		
+		parser.abrirArquivoAnalise(arquivoAnalise);
+		parser.defineLimitador(delimitador);
+		parser.setModoSaida(modoColuna);
+		parser.lerDadosAnalise();
+		parser.salvarDadosAnalise();
+		
+		try {
+			reader = new BufferedReader(new FileReader(new File("totalTimeTab.out")));
+			line = reader.readLine();
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		assertEquals(expectedLine, line);
+	}
+
 }

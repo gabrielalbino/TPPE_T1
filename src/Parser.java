@@ -120,8 +120,6 @@ public class Parser {
 						linha += (i != analise.size() - 1 ? delimitador : "\n");
 					}
 				}
-				System.out.println(linha);
-				System.out.flush();
 				if(foundAny)
 					outputFileWriter.write(linha);
 				index++;
@@ -129,7 +127,7 @@ public class Parser {
 		}
 		if(!modoColuna) {
 			for(int i = 0; i < analise.size(); i++) {
-				linha += i + 1 + ";";
+				linha = i + 1 + delimitador;
 				for(int j = 0; j < analise.get(i).size(); j++) {
 					linha += analise.get(i).get(j) + (j != analise.get(i).size() - 1 ? delimitador : "\n");
 				}
