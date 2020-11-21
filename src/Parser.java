@@ -73,8 +73,6 @@ public class Parser {
 			do {
 				line = reader.readLine();
 				if(line != null) {
-					System.out.println(line);
-					System.out.flush();
 					try {						
 						int tempo = Integer.parseInt(line);
 						analise.get(analiseIndex).add(tempo);
@@ -94,5 +92,19 @@ public class Parser {
 	public ArrayList<ArrayList<Integer>> getDadosAnalise() {
 		return analise; // duplicação
 	}
-	
+
+	public void salvarDadosAnalise() throws EscritaNaoPermitidaException, IOException {// falsificação
+		String arquivoSaida = "totalTimeTab.out";
+		if(file.getPath().contains("analysis")) {
+			arquivoSaida = "analysisTimeTab.out";
+		}
+		abrirArquivoSaida(arquivoSaida);
+		String linha = "";
+		for(int i = 0; i < analise.size(); i++) {
+			linha += (i+1) + (i != analise.size() - 1 ? ";" : "");
+		}
+		linha += "\n";
+		outputFileWriter.write(linha);
+		outputFileWriter.close();
+	}
 }
