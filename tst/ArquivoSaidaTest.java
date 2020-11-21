@@ -21,4 +21,12 @@ public class ArquivoSaidaTest {
 		assertEquals(parser.getArquivoSaida().getPath(), path);
 	}
 
+
+	@Test
+	public void testeArquivoOutput2() throws IOException { //Duplicação
+		String path = "output2.out";
+		parser.abrirArquivoSaida(path);
+		assertEquals(parser.getArquivoSaida().getPath(), path);
+	}
+
 }

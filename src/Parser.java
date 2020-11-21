@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Parser {
 
-	private File file;
+	private File file, outputFile;
 	private String delimitador;
 
 	public void abrirArquivoAnalise(String path) throws ArquivoNaoEncontradoException {
@@ -35,11 +35,11 @@ public class Parser {
 	}
 	
 	public void abrirArquivoSaida(String path) throws IOException {
-		//Falsificação
+		this.outputFile = new File(path);
 	}
 	
 	public File getArquivoSaida() {
-		return new File("output.out"); //Falsificação
+		return outputFile; //Falsificação
 	}
 	
 }
