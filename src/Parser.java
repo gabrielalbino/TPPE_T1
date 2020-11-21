@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -57,6 +58,19 @@ public class Parser {
 	
 	public Boolean getModoSaida() {
 		return modoColuna; //duplicação
+	}
+
+	public void lerDadosAnalise() {
+		// falsificação
+		
+	}
+
+	public ArrayList<ArrayList<Integer>> getDadosAnalise() {
+		ArrayList<ArrayList<Integer>> analise = new ArrayList<ArrayList<Integer>>(); //falsificação
+		for(int i = 0; i < 20; i++) {
+			analise.add(new ArrayList<Integer>());
+		}
+		return analise; // Falsificação
 	}
 	
 }
