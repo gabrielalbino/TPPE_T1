@@ -1,10 +1,12 @@
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Parser {
 
 	private File file, outputFile;
+	private FileWriter outputFileWriter;
 	private String delimitador;
 
 	public void abrirArquivoAnalise(String path) throws ArquivoNaoEncontradoException {
@@ -34,12 +36,18 @@ public class Parser {
 		return this.delimitador; //triangulação
 	}
 	
-	public void abrirArquivoSaida(String path) throws IOException {
-		this.outputFile = new File(path);
+	public void abrirArquivoSaida(String path) throws EscritaNaoPermitidaException {
+		try {			
+			this.outputFile = new File(path);
+			this.outputFileWriter = new FileWriter(this.outputFile);
+		}
+		catch (IOException e) {
+			throw new EscritaNaoPermitidaException("Erro ao abrir o arquivo de saída"); //Triangulação
+		}
 	}
 	
 	public File getArquivoSaida() {
-		return outputFile; //Falsificação
+		return outputFile; //Triangulação
 	}
 	
 }

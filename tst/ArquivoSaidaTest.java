@@ -15,7 +15,7 @@ public class ArquivoSaidaTest {
 	}
 
 	@Test
-	public void testeArquivoOutput1() throws IOException {
+	public void testeArquivoOutput1() throws EscritaNaoPermitidaException {
 		String path = "output.out";
 		parser.abrirArquivoSaida(path);
 		assertEquals(parser.getArquivoSaida().getPath(), path);
@@ -23,10 +23,16 @@ public class ArquivoSaidaTest {
 
 
 	@Test
-	public void testeArquivoOutput2() throws IOException { //Duplicação
+	public void testeArquivoOutput2() throws EscritaNaoPermitidaException { //Duplicação
 		String path = "output2.out";
 		parser.abrirArquivoSaida(path);
 		assertEquals(parser.getArquivoSaida().getPath(), path);
+	}
+
+	@Test(expected = EscritaNaoPermitidaException.class)
+	public void testeArquivoOutput3() throws EscritaNaoPermitidaException { //Triangulação
+		String path = "/saidadInvalida.out";
+		parser.abrirArquivoSaida(path);
 	}
 
 }
