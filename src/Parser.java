@@ -13,6 +13,8 @@ public class Parser {
 	private String delimitador;
 	private Boolean modoColuna;
 	ArrayList<ArrayList<Integer>> analise;
+	int analiseIndex;
+	BufferedReader reader;
 	
 	public void abrirArquivoAnalise(String path) throws ArquivoNaoEncontradoException {
 		File temp = new File(path); 
@@ -64,29 +66,44 @@ public class Parser {
 	}
 
 	public void lerDadosAnalise() {
-		analise = new ArrayList<ArrayList<Integer>>(); //duplicação
-		int analiseIndex = -1;
-		BufferedReader reader;
+		alocarObjetosLeitura();
 		try {
 			reader = new BufferedReader(new FileReader(file));
-			String line;
-			do {
-				line = reader.readLine();
-				if(line != null) {
-					try {						
-						int tempo = Integer.parseInt(line);
-						analise.get(analiseIndex).add(tempo);
-					} catch (NumberFormatException e) {
-						analiseIndex++;
-						analise.add(new ArrayList<Integer>());
-						
-					}
-				}
-			} while (line != null);
-			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		if(reader != null) {
+			String line = null;
+			do {
+				try {
+					line = reader.readLine();
+					if(line != null) {
+						try {						
+							int tempo = Integer.parseInt(line);
+							analise.get(analiseIndex).add(tempo);
+						} catch (NumberFormatException e) {
+							analiseIndex++;
+							analise.add(new ArrayList<Integer>());
+							
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+			} while (line != null);
+			try {
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void alocarObjetosLeitura() {
+		analise = new ArrayList<ArrayList<Integer>>(); //duplicação
+		analiseIndex = -1;
+		reader = null;
 	}
 
 	public ArrayList<ArrayList<Integer>> getDadosAnalise() {
