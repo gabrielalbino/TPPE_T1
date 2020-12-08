@@ -95,45 +95,54 @@ public class Parser {
 
 	public void salvarDadosAnalise() throws EscritaNaoPermitidaException, IOException {// falsificação
 		String arquivoSaida = "totalTimeTab.out";
-		String linha = "";
 		if(file.getPath().contains("analysis")) {
 			arquivoSaida = "analysisTimeTab.out";
 		}
 		abrirArquivoSaida(arquivoSaida);
 		if(modoColuna) {
-			Boolean foundAny;
-			int index = 0;
-			for(int i = 0; i < analise.size(); i++) {
-				linha += (i+1) + (i != analise.size() - 1 ? delimitador : "");
-			}
-			linha += "\n";				
-			outputFileWriter.write(linha);
-			do {
-				linha = "";
-				foundAny = false;
-				for(int i = 0; i < analise.size(); i++) {
-					if(index < analise.get(i).size()) {
-						linha += analise.get(i).get(index) + (i != analise.size() - 1 ? delimitador : "\n");
-						foundAny = true;
-					}
-					else {
-						linha += (i != analise.size() - 1 ? delimitador : "\n");
-					}
-				}
-				if(foundAny)
-					outputFileWriter.write(linha);
-				index++;
-			} while(foundAny);
+			saveFileModoColuna();
 		}
 		if(!modoColuna) {
-			for(int i = 0; i < analise.size(); i++) {
-				linha = i + 1 + delimitador;
-				for(int j = 0; j < analise.get(i).size(); j++) {
-					linha += analise.get(i).get(j) + (j != analise.get(i).size() - 1 ? delimitador : "\n");
-				}
-				outputFileWriter.write(linha);
-			}
+			saveFileModoLinha();
 		}
 		outputFileWriter.close();
+	}
+
+	private void saveFileModoColuna() throws IOException {
+		String linha = "";
+		Boolean foundAny;
+		int index = 0;
+		for(int i = 0; i < analise.size(); i++) {
+			linha += (i+1) + (i != analise.size() - 1 ? delimitador : "");
+		}
+		linha += "\n";				
+		outputFileWriter.write(linha);
+		do {
+			linha = "";
+			foundAny = false;
+			for(int i = 0; i < analise.size(); i++) {
+				if(index < analise.get(i).size()) {
+					linha += analise.get(i).get(index) + (i != analise.size() - 1 ? delimitador : "\n");
+					foundAny = true;
+				}
+				else {
+					linha += (i != analise.size() - 1 ? delimitador : "\n");
+				}
+			}
+			if(foundAny)
+				outputFileWriter.write(linha);
+			index++;
+		} while(foundAny);
+	}
+
+	private void saveFileModoLinha() throws IOException {
+		String linha;
+		for(int i = 0; i < analise.size(); i++) {
+			linha = i + 1 + delimitador;
+			for(int j = 0; j < analise.get(i).size(); j++) {
+				linha += analise.get(i).get(j) + (j != analise.get(i).size() - 1 ? delimitador : "\n");
+			}
+			outputFileWriter.write(linha);
+		}
 	}
 }
